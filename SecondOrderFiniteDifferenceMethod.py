@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import scipy.sparse as sp
 
 plt.rcParams.update({'font.size': 14})
 
@@ -19,16 +20,56 @@ def second_order_finite_difference(x0, xn, n, f, fp_exact_fn):
 
 
 def second_order_finite_difference_dxx(x0, xn, n, f, f_exact_fn):
-    x = np.linspace(x0, xn, n + 1)
+    x = np.linspace(x0, xn, n)
     h = x[1] - x[0]
 
-    f_vals = f(x)
+    row, col, val = [], [], []
+
+    row.append(0)
+    col.append(0)
+    val.append(-2.)
+    row.append(0)
+    col.append(1)
+    val.append(1.)
+    row.append(0)
+    col.append(n-2)
+    val.append(1.)
+    
+    for i in range(1, n-1):
+        row.append(i)
+        col.append(i-1)
+        val.append(1.)
+        
+        row.append(i)
+        col.append(i)
+        val.append(-2.)
+        
+        row.append(i)
+        col.append(i+1)
+        val.append(1.)
+
+    row.append(n-1)
+    col.append(n-1)
+    val.append(-2.)
+    row.append(n-1)
+    col.append(n-2)
+    val.append(1.)
+    row.append(n-1)
+    col.append(1)
+    val.append(1.)
+
+    D2 = sp.coo_matrix((val, (row, col)), shape=(n, n)).tocsc()
+
+    f_vals = f(x) / h**2
+    f_numerical = D2.dot(f_vals)
     f_exact = f_exact_fn(x)
 
+    """
     f_numerical = np.zeros(n + 1)
     f_numerical[0] = (f_vals[1] - 2 * f_vals[0] + f_vals[-2]) / h**2
     f_numerical[-1] = f_numerical[0]
     f_numerical[1:-1] = (f_vals[2:] - 2 * f_vals[1:-1] + f_vals[:-2]) / h**2
+    """
 
     return x, f_numerical, f_exact
 
