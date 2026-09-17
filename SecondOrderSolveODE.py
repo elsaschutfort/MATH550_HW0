@@ -3,6 +3,7 @@ import scipy.sparse as sp
 import scipy.sparse.linalg as spla
 import matplotlib.pyplot as plt
 
+plt.rcParams.update({'font.size': 14})
 
 def solve_ode(x0, xn, n, f_fn, u_exact_fn):
     x = np.linspace(x0, xn, n + 1)
@@ -66,9 +67,9 @@ plt.legend()
 plt.grid(True)
 
 plt.figure()
-plt.loglog(nvals, errInf, 'o-', linewidth=2, label=r'$L_\infty$ Error')
-plt.loglog(nvals, errL2, 's-', linewidth=2, label=r'$L_2$ Error')
-plt.loglog(nvals, errInf[0] * (nvals / nvals[0]) ** (-2.0), 'k--', linewidth=1.5, label='Slope -2')
+plt.loglog(nvals, errInf, 'o-', linewidth=3, label=r'$L_\infty$ Error')
+plt.loglog(nvals, errL2, 's-', linewidth=3, label=r'$L_2$ Error')
+plt.loglog(nvals, errInf[0] * (nvals / nvals[0]) ** (-2.0), 'k--', linewidth=2, label='Slope -2')
 plt.grid(True, which='both')
 plt.xlabel('N')
 plt.ylabel('Relative Error')
