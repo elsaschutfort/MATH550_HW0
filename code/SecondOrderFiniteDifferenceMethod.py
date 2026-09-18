@@ -104,7 +104,7 @@ plt.grid(True, which='both')
 plt.xlabel('N')
 plt.ylabel('Relative Error')
 plt.legend(loc='lower left')
-plt.title('Convergence of Finite Difference Derivative')
+plt.title('Convergence of Finite Difference First Derivative')
 
 
 
@@ -139,7 +139,7 @@ plt.grid(True, which='both')
 plt.xlabel('N')
 plt.ylabel('Relative Error')
 plt.legend(loc='lower left')
-plt.title('Convergence of Finite Difference Derivative')
+plt.title('Convergence of Finite Difference Second Derivative')
 
 
 plt.show()
