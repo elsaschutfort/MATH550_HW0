@@ -21,10 +21,8 @@ MATH550-HW0/
         ├── Problem2Part2.png
         ├── Problem3Part1.png
         ├── Problem3Part2.png
-        ├── Problem4Part1Solution.png
-        ├── Problem4Part1Convergence.png
-        ├── Problem4Part2Solution.png
-        └── Problem4Part2Convergence.png
+        ├── Problem4Part1.png
+        └── Problem4Part2.png
 ```
 
 ## Files
