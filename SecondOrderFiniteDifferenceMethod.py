@@ -64,13 +64,6 @@ def second_order_finite_difference_dxx(x0, xn, n, f, f_exact_fn):
     f_numerical = D2.dot(f_vals)
     f_exact = f_exact_fn(x)
 
-    """
-    f_numerical = np.zeros(n + 1)
-    f_numerical[0] = (f_vals[1] - 2 * f_vals[0] + f_vals[-2]) / h**2
-    f_numerical[-1] = f_numerical[0]
-    f_numerical[1:-1] = (f_vals[2:] - 2 * f_vals[1:-1] + f_vals[:-2]) / h**2
-    """
-
     return x, f_numerical, f_exact
 
 
