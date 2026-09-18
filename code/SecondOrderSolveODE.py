@@ -2,6 +2,8 @@ import numpy as np
 import scipy.sparse as sp
 import matplotlib.pyplot as plt
 
+plt.rcParams.update({'font.size': 18})
+
 def solve_ode(x0, xn, n, u_fn, f_fn):
     x = np.linspace(x0, xn, n+1)
     h = x[1] - x[0]
@@ -51,11 +53,22 @@ for k, N in enumerate(nvals):
     errL2[k] = np.linalg.norm(u_exact - u_num) / np.linalg.norm(u_exact)
 
 plt.figure()
-plt.plot(x, u_exact, 'b', linewidth=3, label='Exact')
-plt.plot(x, u_num, 'r--', linewidth=3, color='orange', label='Finite Difference')
+plt.plot(x, u_exact, 'b', linewidth=4, label='Exact')
+plt.plot(x, u_num, 'r--', linewidth=4, color='orange', label='Finite Difference')
 plt.xlabel('x')
 plt.ylabel('u(x)')
 plt.title("Solution of $u'' + sin(x)u' + u = f(x)$")
 plt.legend()
 plt.grid(True)
+plt.show()
+
+plt.figure()
+plt.loglog(nvals, errInf, 'o-', linewidth=4, label=r'$L_\infty$ Error Slope $\approx$ %0.2f' % np.polyfit(np.log(nvals), np.log(errInf), 1)[0])
+plt.loglog(nvals, errL2, 's-', linewidth=4, label=r'$L_2$ Error Slope $\approx$ %0.2f' % np.polyfit(np.log(nvals), np.log(errL2), 1)[0])
+plt.loglog(nvals, errInf[0] * (nvals / nvals[0]) ** (-2.0), 'k--', linewidth=4, label='Slope $O(N^{-2}$)')
+plt.grid(True, which='both')
+plt.xlabel('N')
+plt.ylabel('Relative Error')
+plt.legend(loc='lower left')
+plt.title('Convergence of Finite Difference Derivative')
 plt.show()
