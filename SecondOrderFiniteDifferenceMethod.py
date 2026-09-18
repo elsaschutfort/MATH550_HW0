@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import scipy.sparse as sp
 
-plt.rcParams.update({'font.size': 14})
+plt.rcParams.update({'font.size': 18})
 
 def second_order_finite_difference(x0, xn, n, f, fp_exact_fn):
     x = np.linspace(x0, xn, n + 1)
@@ -95,10 +95,9 @@ plt.title('Derivative of $f(x) = e^{sin(x)}$')
 plt.legend()
 plt.grid(True)
 
-
 plt.figure()
 plt.loglog(nvals, errInf, 'o-', linewidth=4, label=r'$L_\infty$ Error')
-plt.loglog(nvals, errL2, 's-', linewidth=4, label=r'$L_2$ Error')
+plt.loglog(nvals, errL2, 's-', linewidth=4, label=r'$L_2$ Error Slope')
 plt.loglog(nvals, errInf[0] * (nvals / nvals[0]) ** (-1.0), 'k--', linewidth=4, label='Slope -1')
 plt.loglog(nvals, errL2[0] * (nvals / nvals[0]) ** (-1.5), 'r--', linewidth=4, label='Slope -3/2')
 plt.grid(True, which='both')
@@ -131,5 +130,15 @@ plt.ylabel("f''(x)")
 plt.title('Second Derivative of $f(x) = e^{sin(x)}$')
 plt.legend()
 plt.grid(True)
+
+plt.figure()
+plt.loglog(nvals2, errInf2, 'o-', linewidth=4, label=r'$L_\infty$ Error')
+plt.loglog(nvals2, errL22, 's-', linewidth=4, label=r'$L_2$ Error Slope')
+plt.grid(True, which='both')
+plt.xlabel('N')
+plt.ylabel('Relative Error')
+plt.legend(loc='lower left')
+plt.title('Convergence of Finite Difference Derivative')
+
 
 plt.show()
